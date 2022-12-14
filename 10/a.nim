@@ -39,5 +39,4 @@ let
     signalStrength = (20*cycle20[^1][1]) + (60*cycle60[^1][1]) + (100*cycle100[^1][1]) + (140*cycle140[^1][1]) + (180*cycle180[^1][1]) + (220*cycle220[^1][1])
 
 echo "answer is ", signalStrength
-
  
