@@ -17,7 +17,7 @@ proc registerSignal (cycle, spritePosition: int) =
     if ((cycle mod 40) - 1) in spritePosition-1..spritePosition+1:
         lineText.add("#")
     else:
-        lineText.add(".")
+        lineText.add(" ")
 
     if cycle mod 40 == 0:
         lineText.add("\n")

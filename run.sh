@@ -11,3 +11,4 @@ while inotifywait -e modify . *.txt
 
 done
 # cd ..
+
