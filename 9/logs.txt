@@ -1,0 +1,79 @@
+head went right
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went right
+  -- head is 2 step to the right
+       -->no diagonal case is matched
+head went right
+  -- head is 2 step to the right
+       -->no diagonal case is matched
+head went right
+  -- head is 2 step to the right
+       -->no diagonal case is matched
+head went up
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went up
+       -->no simple case is matched
+  -- head just moved 2 above and to the right
+head went up
+  -- head is 2 step above
+       -->no diagonal case is matched
+head went up
+  -- head is 2 step above
+       -->no diagonal case is matched
+head went left
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went left
+       -->no simple case is matched
+  -- head is above and just moved 2 steps left
+head went left
+  -- head is 2 step to the left
+       -->no diagonal case is matched
+head went down
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went right
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went right
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went right
+       -->no simple case is matched
+  -- head is below and just moved 2 steps right
+head went right
+  -- head is 2 step to the right
+       -->no diagonal case is matched
+head went down
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went left
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went left
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went left
+       -->no simple case is matched
+  -- head is below and just moved 2 steps left
+head went left
+  -- head is 2 step to the left
+       -->no diagonal case is matched
+head went left
+  -- head is 2 step to the left
+       -->no diagonal case is matched
+head went right
+       -->no simple case is matched
+       -->no diagonal case is matched
+head went right
+       -->no simple case is matched
+       -->no diagonal case is matched
+==================================
+final positions are: 
+  Head X: 2
+  Head Y: 2
+  Tail X: 1
+  Tail Y: 2
+==================================
