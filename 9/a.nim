@@ -7,7 +7,7 @@ var
     tPosX, tPosY: int
     tailposlogger: seq[(int, int)]
 
-proc updateTail =
+proc updateTail(hposX, hPosY: int; tPosX, tPosY: var int) =
     if not(hposX != tposX and hposY != tposY) or not(abs(hPosX - tPosX) == 1 and hPosY == tPosY) or not(abs(hPosY - tPosY) == 1 and hPosX == tPosX):
         #they are not touching and not too far from each other
         
@@ -105,25 +105,26 @@ proc goRight(stepSize: int) =
     for step in 1..stepSize:
         echo "head went right"
         inc hposX
-        updateTail()
+        updateTail(hPosX, hPosY, tPosX, tPosY)
 
 proc goLeft(stepSize: int) =
     for step in 1..stepSize:
         echo "head went left"
         dec hposX
-        updateTail()
+        updateTail(hPosX, hPosY, tPosX, tPosY)
 
 proc goUp(stepSize: int) =
     for step in 1..stepSize:
         echo "head went up"
         inc hposY
-        updateTail()
+        updateTail(hPosX, hPosY, tPosX, tPosY)
+
 
 proc goDown(stepSize: int) =
     for step in 1..stepSize:
         echo "head went down"
         dec hposY
-        updateTail()
+        updateTail(hPosX, hPosY, tPosX, tPosY)
 
 
 for instruction in data:
