@@ -1,30 +1,55 @@
 import strutils, sequtils, algorithm, tables, deques
 
+proc hcf(a, b: int): int =
+    if a == 0:
+        return b
+    if b == 0: 
+        return a
+    var
+        bigger = max(a, b)
+        smaller = min(a, b)
+    
+        rem = bigger mod smaller
+
+    hcf(smaller, rem)
+
+proc lcm(a, b: int): int = a*b div hcf(a, b)
+
+proc lcm(nums: seq[int]): int =
+    nums.foldl(lcm(a, b))
+
 const 
     data = readfile("data.txt").strip.splitLines
     numberOfMonkeysInstructions = (data.len + 1) div 7
     instructions = data.distribute(numberOfMonkeysInstructions)
     numberOfMonkeys = instructions.len
-    rounds = 20
-
+    rounds = 10000
 
 var 
     monkeyActivityCount = newSeq[int](numberOfMonkeys)
     monkeyItems = initTable[string, Deque[int]]()
+    testDivisors: seq[int]
+    testDivisorsLcm: int
 
 for monkeyNumber, instruction in instructions:
     let 
         monkeyName = instruction[0].replace(" ").replace(":")
         startingItems = instruction[1].split(":")[1].strip.split(", ").map(parseint)
+        testCondition = instruction[3].split(" by ")[1].parseint
+
 
     #initialise the starting items
     monkeyItems[monkeyName] = startingItems.toDeque
+
+    #collect all the test conditions so I can find the lcm
+    testDivisors.add(testCondition)
+
+testDivisorsLcm = lcm(testDivisors)
 
 for _ in 0..<rounds:
     for monkeyNumber, instruction in instructions:
         let 
             monkeyName = instruction[0].replace(" ").replace(":")
-            # startingItems = instruction[1].split(":")[1].strip.split(", ").map(parseint)
             operation = instruction[2].split(" = ")[1].splitWhiteSpace[1..2]
             testCondition = instruction[3].split(" by ")[1].parseint
             actionOnTestPass = instruction[4].splitWhiteSpace[^1].parseint
@@ -59,8 +84,10 @@ for _ in 0..<rounds:
                 else:
                     echo " This operand is kinda wierd: ", operation[0]
 
-            #div worry level by three 
-            newValue = newValue div 3
+            #reduce the number to avoid integer overflows while still passing divisibility tests
+
+            while newValue > testDivisorsLcm:
+                newValue -= testDivisorsLcm
 
             #execute the test
             if newValue mod testCondition == 0:
@@ -71,8 +98,6 @@ for _ in 0..<rounds:
                 monkeyItems["Monkey" & $actionOnTestFail].addLast(newValue)
                 # echo monkeyName, "  threw ", newValue, " to ", "Monkey" & $actionOnTestFail
 
-            
-
     # echo monkeyName
     # echo startingItems
     # echo operation
@@ -80,12 +105,10 @@ for _ in 0..<rounds:
     # echo actionOnTestPass
     # echo actionOnTestFail
     
-echo monkeyItems
-
-var answer: int
+echo monkeyActivityCount
 
 monkeyActivityCount.sort()
 
-answer = monkeyActivityCount[^1] * monkeyActivityCount[^2] #the two top values
+var answer = monkeyActivityCount[^1] * monkeyActivityCount[^2] #the two top values
 
 echo "answer is ", answer
